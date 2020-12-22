@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Hello World</h1>
+        {% if api == "Error..." %}
+          There is a problem with your api url
+         
+        {% else%}
+           <h1>{{ api.companyName }}</h1><br/>
+           Price: ${{ api.latestPrice }}<br/>
+           previousclose: ${{ api.previousClose }}<br/>
+           marketcap: {{ api.marketCap }}<br/>
+           ytdChange: {{ api.ytdChange }}<br/>
+           week52High: {{ api.week52High }}<br/>
+           week52low: {{ api.week52Low }}<br/>
 
+        {% endif %}
+
+   
 {% endblock %}
