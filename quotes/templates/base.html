@@ -43,6 +43,11 @@
     </nav>
     <div class="container">
         <br />
+        {% if messages %}
+        {% for message in messages %}
+
+
+        {% endfor%}
         {% block content %}
         {% endblock %}
     </div>
