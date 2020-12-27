@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
+from django.http import HttpResponse
 from .models import Stock
 from .forms import StockForm
 from django.contrib import messages
+from django.views.generic import TemplateView
 
 
 def home(request):
@@ -67,3 +69,47 @@ def delete(request, stock_id):
 def delete_stock(request):
     ticker = Stock.objects.all()
     return render(request, "delete_stock.html", {"ticker": ticker})
+
+
+def showstock(request):
+    import matplotlib.pyplot as plt
+    import requests
+    import io
+    import pandas as pd
+    import urllib, base64
+
+    params = {
+        "currency": "EURUSD",
+        "start_date": "2018-07-02",
+        "end_date": "2018-12-06",
+        "api_key": "**************",
+    }
+    response = requests.get("https://fxmarketapi.com/apipandas", params=params)
+    df= pd.read_json(response.text)
+    df.head()
+    plt.switch_backend('agg')
+    plt.plot(df.close)
+    fig = plt.gcf()
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png")
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri = urllib.parse.quote(string)
+    return render(request, "chart.html", {"data": uri})
+
+
+def showstock1(request):
+    import matplotlib.pyplot as plt
+    import requests
+    import io
+    import urllib, base64
+
+    plt.switch_backend('agg') #https://www.programcreek.com/python/example/102348/matplotlib.pyplot.switch_backend
+    plt.plot(range(10))
+    fig = plt.gcf()
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png")
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri = urllib.parse.quote(string)
+    return render(request, "chart.html", {"data": uri})
