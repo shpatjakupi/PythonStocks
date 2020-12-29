@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if ticker %}
+{{ ticker }}
+{% endif %}
+
+{% if api %}
+{% if api == "Error..."%}
+There is a problem with your stock search
+
+{% else %}
+<h1>{{ api.companyName }}</h1><br />
+Price: ${{ api.latestPrice }}<br />
+previousclose: ${{ api.previousClose }}<br />
+marketcap: {{ api.marketCap }}<br />
+ytdChange: {{ api.ytdChange }}<br />
+week52High: {{ api.week52High }}<br />
+week52low: {{ api.week52Low }}<br />
+
+<h1>bro</h1>
+<body>
+    <img src="data:image/png;base64,{{ data }}" alt="" height="250" ,width="250">
+  </body>
+{% endif %}
+{% endif %}
+
+
+{% endblock %}

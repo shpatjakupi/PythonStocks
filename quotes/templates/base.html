@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">Stock Portfolio</a>
+            <a class="navbar-brand" href="{}">Stock Portfolio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -31,16 +31,16 @@
                         <a class="nav-link" href="{% url 'add_stock' %}">Add Stock</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'delete_stock' %}">Delete Stock</a>
+                        <a class="nav-link" href="{% url 'delete_stock' %}">Delete Stock</a> 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'chart' %}">chart</a>
+                         <a class="nav-link" href="{% url 'graph' %}">graph</a> 
                     </li>
 
 
 
                 </ul>
-                <form action="{% url 'home' %}" class="d-flex" method="POST">
+                <form action="{% url 'graph' %}" class="d-flex" method="POST">
                     {% csrf_token %}
                     <input class="form-control me-2" type="search" placeholder="Get Stock Quote" aria-label="Search"
                         name="ticker">
@@ -84,3 +84,4 @@
 </body>
 
 </html>
+
